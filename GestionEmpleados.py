@@ -1,5 +1,7 @@
 import pickle
 from Empleado import Empleado
+from EmpleadoPer import EmpleadoPermanente
+from EmpleadoTem import EmpleadoTemporal
 
 class GestionEmpleados:
     def __init__(self):
@@ -7,6 +9,7 @@ class GestionEmpleados:
         self.cargar_datos()
 
     def agregar_empleado(self):
+        tipo_empleado = input("Ingrese el tipo de empleado (permanente/temporal): ").lower()
         nombre = input("Ingrese el nombre del empleado: ")
         while True:
             try:
@@ -24,7 +27,18 @@ class GestionEmpleados:
                 break
             except ValueError as e:
                 print(e)
-        empleado = Empleado(nombre, edad, salario)
+        area = input("Ingrese el área de trabajo del empleado: ")
+
+        if tipo_empleado == 'permanente':
+            beneficios = input("Ingrese los beneficios del empleado permanente: ")
+            empleado = EmpleadoPermanente(nombre, edad, salario, area, beneficios)
+        elif tipo_empleado == 'temporal':
+            fecha_fin_contrato = input("Ingrese la fecha de fin de contrato del empleado temporal: ")
+            empleado = EmpleadoTemporal(nombre, edad, salario, area, fecha_fin_contrato)
+        else:
+            print("Tipo de empleado no válido. Se creará un empleado genérico.")
+            empleado = Empleado(nombre, edad, salario, area)
+
         self.empleados.append(empleado)
         self.guardar_datos()
         print("Empleado agregado correctamente.")
@@ -50,7 +64,7 @@ class GestionEmpleados:
         empleado = self.buscar_empleado(nombre_buscar)
 
         if empleado:
-            opcion = input("¿Qué desea editar? (nombre/edad/salario): ").lower()
+            opcion = input("¿Qué desea editar? (nombre/edad/salario/area): ").lower()
 
             if opcion == 'nombre':
                 nuevo_nombre = input("Ingrese el nuevo nombre: ")
@@ -71,6 +85,9 @@ class GestionEmpleados:
                         break
                     except ValueError as e:
                         print(e)
+            elif opcion == 'area':
+                nueva_area = input("Ingrese la nueva área de trabajo: ")
+                empleado.area = nueva_area
             else:
                 print("Opción no válida.")
             self.guardar_datos()

@@ -4,7 +4,7 @@ def main():
     gestion = GestionEmpleados()
 
     while True:
-        print("\n        SURA")
+        print("\nBienvenido al registro de empleados de SURA")
         print("1. Agregar empleado")
         print("2. Mostrar empleados")
         print("3. Buscar empleado por nombre")

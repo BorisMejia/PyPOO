@@ -1,8 +1,9 @@
 class Empleado:
-    def __init__(self, nombre, edad, salario):
+    def __init__(self, nombre, edad, salario, area):
         self._nombre = nombre
         self._edad = edad
         self._salario = salario
+        self._area = area
 
     @property
     def nombre(self):
@@ -34,5 +35,13 @@ class Empleado:
         else:
             raise ValueError("El salario no puede ser negativo.")
 
+    @property
+    def area(self):
+        return self._area
+
+    @area.setter
+    def area(self, value):
+        self._area = value
+
     def __str__(self):
-        return f"Nombre: {self.nombre}, Edad: {self.edad}, Salario: {self.salario}"
+        return f"Nombre: {self.nombre}, Edad: {self.edad}, Salario: {self.salario}, Area: {self.area}"
