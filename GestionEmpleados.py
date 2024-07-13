@@ -72,11 +72,14 @@ class GestionEmpleados:
             elif opcion == 'edad':
                 while True:
                     try:
-                        nueva_edad = int(input("Ingrese la nueva edad (mayor o igual a 16): "))
-                        empleado.edad = nueva_edad
-                        break
+                        nueva_edad = int(input(f"Ingrese la nueva edad (mayor o igual a {empleado.edad}): "))
+                        if nueva_edad >= empleado.edad:
+                            empleado.edad = nueva_edad
+                            break
+                        else:
+                            print(f"La nueva edad no puede ser inferior a la edad actual ({empleado.edad}).")
                     except ValueError as e:
-                        print(e)
+                        print("Por favor, ingrese un número válido.")
             elif opcion == 'salario':
                 while True:
                     try:
@@ -84,7 +87,7 @@ class GestionEmpleados:
                         empleado.salario = nuevo_salario
                         break
                     except ValueError as e:
-                        print(e)
+                        print("Por favor, ingrese un número válido.")
             elif opcion == 'area':
                 nueva_area = input("Ingrese la nueva área de trabajo: ")
                 empleado.area = nueva_area
